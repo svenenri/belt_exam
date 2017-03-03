@@ -37,7 +37,7 @@ class TripManager(models.Manager):
 class Trip(models.Model):
 	destination = models.CharField(max_length=255)
 	description = models.TextField()
-	planner = models.ForeignKey(User, default=1, related_name='trip_planner')
+	planner = models.ManyToManyField(User, default=1, related_name='trip_planner')
 	traveler = models.ManyToManyField(User, related_name='travel_user')
 	travelToDate = models.DateTimeField(auto_now=False, auto_now_add=False)
 	travelFromDate = models.DateTimeField(auto_now=False, auto_now_add=False)
