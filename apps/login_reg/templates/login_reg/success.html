@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Login and Registration</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<h1>Success Page</h1>
+		{% for info in userInfo %}
+			<h2>Success! Welcome, {{info.first_name}}</h2>
+		{% endfor %}
+		{% if messages %}
+			{% for message in messages %}
+				<p class="errors">{{message}}</p>
+			{% endfor %}
+		{% endif %}
+		<form class="return" action="{% url 'login_reg:logout' %}" method="get">
+			<input type="submit" name="return" value="Log Out">
+		</form>
+	</body>
+</html>
