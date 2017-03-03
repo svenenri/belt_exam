@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Add a Trip</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="banner">
+			<p><a href="{% url 'travel:travel' %}">Home</a></p>
+			<p><a href="{% url 'login_reg:logout' %}">Logout</a></p>
+		</div>
+		<div class="addTrip">
+			{% if messages %}
+				{% for message in messages %}
+				<h2>{{message}}</h2>
+				{% endfor %}
+			{% endif %}
+			<h2>Add a Trip</h2>
+			<form class="add" action="{% url 'travel:process' %}" method="post">
+				{% csrf_token %}
+				<label for="destination">
+					Destination:
+					<input type="text" name="destination">
+				</label>
+				<label for="description">
+					Description:
+					<input type="text" name="description">
+				</label>
+				<label for="dateFrom">
+					Travel Date Start:
+					<input type="date" name="dateFrom">
+				</label>
+				<label for="dateTo">
+					Travel Date To:
+					<input type="date" name="dateTo">
+				</label>
+				<input type="submit" name="submit" value="Add">
+			</form>
+		</div>
+	</body>
+</html>

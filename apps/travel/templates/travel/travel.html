@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		{% for user in userInfo %}
+		<title>Welcome, {{user.alias}}</title>
+		{% endfor %}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="banner">
+			{% for user in userInfo %}
+			<h3>Hello, {{user.alias}}!</h3>
+			{% endfor %}
+			<p><a href="{% url 'login_reg:logout' %}">Logout</a></p>
+		</div>
+		{% if messages %}
+			{% for message in messages %}
+			<h2>{{message}}</h2>
+			{% endfor %}
+		{% endif %}
+		<div class="trips">
+			<h3>Your Trip Schedules</h3>
+			<!--Going to render all travel plans created by the user and other plans joined by the user-->
+			<table>
+				<tr>
+					<th>Destination</th>
+					<th>Travel Start Date</th>
+					<th>Travel End Date</th>
+					<th>Plan</th>
+				</tr>
+				{% if tripInfo%}
+				{% for trip in tripInfo %}
+				<tr>
+					<td><a href="destination/{{trip.id}}">{{trip.destination}}</a></td>
+					<td>{{trip.travelFromDate}}</td>
+					<td>{{trip.travelToDate}}</td>
+					<td>{{trip.description}}</td>
+				</tr>
+				{% endfor %}
+				{% else %}
+				<h4>No Other Travel Plans Yet. Add Travel Plans Below!</h4>
+				{% endif %}
+			</table>
+
+		</div>
+		<div class="reviewsAll">
+			<h3>Other User's Travel Plans</h3>
+			<!-- Going to render all travel plans by other users. Clicking join will move the selected plan to the user's trip schedule and out of this view.  -->
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Destination</th>
+					<th>Travel Start Date</th>
+					<th>Travel End Date</th>
+					<th>Do You Want to Join?</th>
+				</tr>
+				{% if otherTrips %}
+				{% for trip in otherTrips %}
+				<tr>
+					<td>{{trip.traveler.name}}</td>
+					<td><a href="destination/{{trip.id}}">{{trip.destination}}</a></td>
+					<td>{{trip.travelToDate}}</td>
+					<td>{{trip.travelFromDate}}</td>
+					<td><a href="add/process/join/{{trip.id}}">Join</a></td>
+				</tr>
+				{% endfor %}
+				{% else %}
+				<h4>No Other Users With Travel Plans Yet!</h4>
+				{% endif %}
+			</table>
+		</div>
+		<h3><a href="{% url 'travel:add' %}">Add Travel Plan</a></h3>
+	</body>
+</html>

@@ -40,11 +40,11 @@ def process(request):
 					# Adding new user to Db
 					userAdd = User.objects.addUser(validateInfo, pwCheck[1])
 
-					# Get user info and redirect to success page
+					# Get user info and redirect to main travel page
 					newUserGet = User.objects.getUserByEmail(email)
 					request.session['email'] = email
 					messages.success(request, 'Successfully logged in!')
-					return redirect(reverse('login_reg:success'))
+					return redirect(reverse('travel:travel'))
 				else:
 					for idx in range(len(pwCheck[1])):
 						messages.error(request, pwCheck[1][idx])
@@ -58,7 +58,7 @@ def process(request):
 			# Query Db for user based on entered email
 			findUser = User.objects.getUserByEmail(email)
 
-			# If verify user exists in Db. If yes, send to success page. if no tell user to register
+			# If verify user exists in Db. If yes, send to travel page. if no tell user to register
 			if findUser:
 				for user in findUser:
 					pwUser = user.password
@@ -70,7 +70,7 @@ def process(request):
 				if confirmPW[0] == True:
 					request.session['email'] = email
 					messages.success(request, confirmPW[1])
-					return redirect('process/login/' + str(id))
+					return redirect(reverse('travel:travel'))
 				else:
 					messages.error(request, confirmPW[1])
 					return redirect(reverse('login_reg:main'))
@@ -78,16 +78,17 @@ def process(request):
 				messages.error(request, 'User not found. Please Register above.')
 				return redirect(reverse('login_reg:main'))
 
-def success(request, id):
-	userInfo = User.objects.getUserByEmail(request.session['email'])
-	for info in userInfo:
-		id = info.id
-	context = {
-		'userInfo': userInfo
-	}
-	return render(request, 'login_reg/success.html', context)
+# def success(request, id):
+# 	userInfo = User.objects.getUserByEmail(request.session['email'])
+# 	for info in userInfo:
+# 		id = info.id
+# 	context = {
+# 		'userInfo': userInfo
+# 	}
+# 	return render(request, 'login_reg/success.html', context)
 
 def logout(request):
 	for stuff in request.session:
 		del stuff
+	messages.success(request, 'You have successfully logged out.')
 	return redirect(reverse('login_reg:main'))
