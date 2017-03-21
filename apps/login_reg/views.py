@@ -78,17 +78,9 @@ def process(request):
 				messages.error(request, 'User not found. Please Register above.')
 				return redirect(reverse('login_reg:main'))
 
-# def success(request, id):
-# 	userInfo = User.objects.getUserByEmail(request.session['email'])
-# 	for info in userInfo:
-# 		id = info.id
-# 	context = {
-# 		'userInfo': userInfo
-# 	}
-# 	return render(request, 'login_reg/success.html', context)
-
 def logout(request):
-	for stuff in request.session:
-		del stuff
+	for key in request.session.keys():
+		del request.session[key]
+
 	messages.success(request, 'You have successfully logged out.')
 	return redirect(reverse('login_reg:main'))

@@ -3,57 +3,68 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Welcome to Book Reviews</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'login_reg/css/foundation.css' %}">
 	</head>
 	<body>
-		<div class="registration">
+		<div class="row">
 			{% if messages %}
 				{% for message in messages %}
-					<p class="messages">{{message}}</p>
+					<p class="small-12 large-12 column">{{message}}</p>
 				{% endfor %}
 			{% endif %}
-			<h1>Welcome!</h1>
-			<h2>Registration</h2>
-			<form class="registration" action="{% url 'login_reg:process' %}" method="post">
-				{% csrf_token %}
-				<label for="name">
-					Name:
-					<input type="text" name="name" placeholder="Johnny Appleseed">
-				</label>
-				<label for="alias">
-					Username:
-					<input type="text" name="alias" placeholder="johnny1914">
-				</label>
-				<label for="email">
-					Email:
-					<input type="text" name="email" placeholder="jappleseed@email.com">
-				</label>
-				<label for="password">
-					Password:
-					<input type="password" name="password">
-				</label>
-				<label for="pwConfirm">
-					<p>*Password should be at least 8 characters</p>
-					Confirm PW:
-					<input type="password" name="pwConfirm">
-				</label>
-				<input type="submit" name="submit" value="Register">
-			</form>
 		</div>
-		<div class="login">
-			<h2>Login</h2>
-			<form class="login" action="{% url 'login_reg:process' %}" method="post">
-				{% csrf_token %}
-				<label for="email">
-					Email:
-					<input type="text" name="email" placeholder="jappleseed@email.com">
-				</label>
-				<label for="password">
-					Password:
-					<input type="password" name="password">
-				</label>
-				<input type="submit" name="submit" value="Login">
-			</form>
+		<div class="row">
+			<div class="small-6 large-centered columns">
+				<h1>Social Trips</h1>
+			</div>
+		</div>
+		<div class="expand row">
+			<div class="small-6 large-6 column">
+				<h2>Registration</h2>
+				<form class="registration" action="{% url 'login_reg:process' %}" method="post">
+					{% csrf_token %}
+					<label for="name">
+						Name:
+						<input type="text" name="name" placeholder="Johnny Appleseed">
+					</label>
+					<label for="alias">
+						Username:
+						<input type="text" name="alias" placeholder="johnny1914">
+					</label>
+					<label for="email">
+						Email:
+						<input type="text" name="email" placeholder="jappleseed@email.com">
+					</label>
+					<label for="password">
+						Password:
+						<input type="password" name="password">
+					</label>
+					<label for="pwConfirm">
+						<p>*Password should be at least 8 characters</p>
+						Confirm PW:
+						<input type="password" name="pwConfirm">
+					</label>
+					<input type="submit" name="submit" value="Register">
+				</form>
+			</div>
+			<div class="small-6 large-6 column">
+				<div class="login">
+					<h2>Login</h2>
+					<form class="login" action="{% url 'login_reg:process' %}" method="post">
+						{% csrf_token %}
+						<label for="email">
+							Email:
+							<input type="text" name="email" placeholder="jappleseed@email.com">
+						</label>
+						<label for="password">
+							Password:
+							<input type="password" name="password">
+						</label>
+						<input type="submit" name="submit" value="Login">
+					</form>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

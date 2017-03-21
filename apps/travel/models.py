@@ -6,6 +6,7 @@ from ..login_reg.models import User
 class TripManager(models.Manager):
 	# Validate trip dates
 	def checkDates(self, dateFrom, dateTo):
+		# Second check to verify that dateFrom is < dateTime.now
 		if dateTo > dateFrom:
 			confirm = (True, 'Valid dates')
 		else:
