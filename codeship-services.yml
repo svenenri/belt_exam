@@ -1,0 +1,4 @@
+beltexam:
+  build:
+    image: beltexam
+    dockerfile: Dockerfile
