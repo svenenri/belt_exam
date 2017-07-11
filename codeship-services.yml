@@ -1,4 +1,4 @@
 beltexam:
   build:
     image: beltexam
-    dockerfile: Dockerfile
+    dockerfile_path: Dockerfile

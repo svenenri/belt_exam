@@ -1,2 +1,3 @@
 - name: python
   service: beltexam
+  command: pip install -r requirements.txt

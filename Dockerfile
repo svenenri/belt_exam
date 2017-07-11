@@ -1,6 +1,5 @@
 FROM python:2-onbuild
 
-RUN pip install -r requirements.txt
 RUN brew update && brew upgrade --all && brew cleanup && brew prune
 RUN install docker-machine
 
